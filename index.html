@@ -790,7 +790,7 @@ const cPath = c => c.parent ? `/courses/${c.parent}/${c.s}/` : `/courses/${c.s}/
 /* ===== HELPERS ===== */
 const $ = (s,el=document)=>el.querySelector(s);
 const $$ = (s,el=document)=>[...el.querySelectorAll(s)];
-const L = p=>`#${p}`;
+const L = p=> p==='/blog/' ? '/blog' : `#${p}`;
 const R = {};                       // route registry: path -> {t,d,r,ld,sec}
 const page = (p,o)=>{R[p]=o;};
 const fmtD = (d,o)=>d.toLocaleDateString('en-GB',o);
