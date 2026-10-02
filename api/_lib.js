@@ -68,6 +68,17 @@ function renderNodes(nodes) {
           return `<blockquote>${kids()}</blockquote>`
         case 'horizontalrule':
           return '<hr>'
+        case 'table':
+          return `<div class="table-wrap"><table><tbody>${kids()}</tbody></table></div>`
+        case 'tablerow':
+          return `<tr>${kids()}</tr>`
+        case 'tablecell': {
+          const tag = n.headerState > 0 ? 'th' : 'td'
+          const span =
+            (n.colSpan > 1 ? ` colspan="${Number(n.colSpan)}"` : '') +
+            (n.rowSpan > 1 ? ` rowspan="${Number(n.rowSpan)}"` : '')
+          return `<${tag}${span}>${kids()}</${tag}>`
+        }
         case 'link':
         case 'autolink': {
           const url = safeUrl((n.fields && n.fields.url) || n.url)
@@ -103,6 +114,13 @@ body{font-family:system-ui,sans-serif;max-width:760px;margin:0 auto;padding:2rem
 a{color:#0b5fff}
 h1,h2{line-height:1.3}
 time{color:#666;font-size:.9rem}
+.answer{background:#eef4ff;padding:1rem;border-radius:8px}
+.toc{background:#f6f6f6;padding:1rem;border-radius:8px}
+.table-wrap{overflow-x:auto}
+table{border-collapse:collapse;width:100%}
+th,td{border:1px solid #ddd;padding:.5rem;text-align:left;vertical-align:top}
+th{background:#f3f3f3}
+td p,th p{margin:0}
 </style>
 </head>
 <body>
